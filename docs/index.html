@@ -26,7 +26,7 @@
 	<h3>Experiment Overview</h3>
 	<p>We used a dataset of 15,000 user reviews from 15 productivity apps. The dataset can be found <a target="_blank" href="https://bit.ly/3ez5TOO">here</a>.</p>
 	<p>Reviews have a score of 1-5. Our goal is to classify each review as being negative (score of 1 or 2), neutral (score of 3), or positive (score of 4 or 5).</p>
-	<p>We used cross entropy as our loss function. We'll be comparing our results using accuracy percentage.</p>
+	<p>We used cross entropy as our loss function. We'll be comparing our results using accuracy percentage (the dataset is balanced).</p>
 	<p>We used the same training/validation/test split as used in <a target="_blank" href="https://www.curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/">the BERT tutorial</a>, i.e. 90/5/5.
 	<p>We used the <a target="_blank" href="https://arxiv.org/abs/1711.05101">Adam optimizer with weight decay</a> along with a linear learning rate scheduler.</p>	
 	<p>We used the pretrained transformers models provided by <a target="_blank" href="https://huggingface.co/">Huggingface</a> in their <a target="_blank" href="https://huggingface.co/transformers/">transformers library</a>.</p>
@@ -69,7 +69,7 @@
 	<h3>Conclusion</h3>
 	<p>Given that all of these models performed very similarly while drastically varying in model size, it seems that bigger is not always better or that even a fancier architecture is not always better.</p>
 	<p>Perhaps the reason why <a target="_blank" href="https://arxiv.org/abs/1810.04805">BERT</a> was chosen without much explanation w.r.t why in the <a target="_blank" href="https://www.curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/">original tutorial</a> was simply because it stemmed from the most popular NLP paper at the time.</p>
-	<p>Seeing that <code>albert-base-v2</code> was the best model, perhaps the takeaway message is that jumping straight into using bigger models while expecting better performance is not advisable. Another takeaway might be that using a smaller pretrained model is highlly valuable as well since hyperparameter tuning is significantly faster. </p>
+	<p>Seeing that <code>albert-base-v2</code> was the best model, perhaps the takeaway message is that jumping straight into using bigger models while expecting better performance is not advisable. Another takeaway might be that using a smaller pretrained model is highly valuable as well since hyperparameter tuning is significantly faster. </p>
 	<p>An interesting piece of future work would be to train a simpler NLP model, e.g. an <a target="_blank" href="https://explosion.ai/blog/deep-learning-formula-nlp">EEAP model</a>, to see if using a pretrained transformers model is even worth it since the pretrained trainsformers models are so large. If you're interested in seeing how that experiment would play out, <a target="_blank" href="https://paul-tqh-nguyen.github.io/about/#contact">let me know</a>.</p>
       </div>
       <table style="table-layout: fixed; width: 100%; padding-top: 40px; padding-bottom: 40px;">

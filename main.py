@@ -74,7 +74,6 @@ NUMBER_OF_SENTIMENTS = len(SENTIMENT_ID_TO_SENTIMENT)
 # Sanity Checking Utilities #
 #############################
 
-
 @contextmanager
 def _transformers_logging_suppressed() -> Generator:
     logger_to_original_level = {}
@@ -531,7 +530,6 @@ def aggregate_hyperparameter_search_results() -> None:
 ##########
 
 def perform_hyperparameter_search() -> None:
-    # Execute Hyperparameter Search
     callback_generators = []
     for transformer_model_spec in TRANSFORMER_MODEL_SPEC_TO_MODEL_UTILS.keys():
         callback_generators.append(
