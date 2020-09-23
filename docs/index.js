@@ -509,7 +509,7 @@ d3.json('./aggregated_results.json')
                 'additionalStylesString': additionalStylesString,
                 'barAttributes': barLabel => {
                 },
-                'title': `Testing Accuracy Per Example`,
+                'title': `Testing Accuracy Per Example For Best Models`,
                 'cssFile': 'index.css',
                 'yMinValue': 0,
                 'yMaxValue': 1,

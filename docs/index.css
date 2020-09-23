@@ -151,6 +151,10 @@ p {
     margin-block-end: 0em;
 }
 
+ul li {
+    margin-left: 10vw;
+}
+
 /**********/
 /* Footer */
 /**********/

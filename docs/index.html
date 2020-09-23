@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Collaborative Filtering For Anime</title>
+    <title>Pretrained Transformers Comparison</title>
     <link rel="stylesheet" type="text/css" href="./index.css">
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="https://unpkg.com/requirejs@2.3.5/require.js"></script>
@@ -10,35 +10,66 @@
   <body>
     <header class="stone-background">
       <div class="vertical-padding">
-	<h1 style="">Collaborative Filtering For Anime</h1>
-	<p>Dummy Dummy Dummy Dummy Dummy</p>
+	<h1 style="">Pretrained Transformers Comparison</h1>
+	<p>A comparison of 15 pretrained transformers on the task of sentiment analysis for Google Play app reviews.</p>
       </div>
     </header>
     <section id="introduction">
       <div class="horizontal-padding vertical-padding">
 	<h3>Intro</h3>
-	<p>Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy.</p>
+	<p>This article goes over out findings when comparing how 15 pretrained transformers models compare on GGoogle Reviews. This effort originally started as a completion of the tutorial found <a target="_blank" href="https://www.curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/">here</a>. However, the tutorial chose to use <a target="_blank" href="https://arxiv.org/abs/1810.04805">BERT</a> without much explanation of why it was chosen over other options such as <a target="_blank" href="https://arxiv.org/abs/1907.11692">RoBERTa</a>. Thus, we decided to see if any other pretrained models would perform better.</p>
       </div>
     </section>
     <section id="experiment-overview" class="stone-background">
       <div class="horizontal-padding vertical-padding">
 	<h3>Experiment Overview</h3>
-	<p>Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy.</p>
+	<p>We used a dataset of 15,000 user reviews from 15 productivity apps. The dataset can be found <a target="_blank" href="https://bit.ly/3ez5TOO">here</a>.</p>
+	<p>Reviews have a score of 1-5. Our goal is to classify each review as being negative (score of 1 or 2), neutral (score of 3), or positive (score of 4 or 5).</p>
+	<p>We used cross entropy as our loss function. We'll be comparing our results using accuracy percentage.</p>
+	<p>We used the same training/validation/test split as used in <a target="_blank" href="https://www.curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/">the BERT tutorial</a>, i.e. 90/5/5.
+	<p>We used the <a target="_blank" href="https://arxiv.org/abs/1711.05101">Adam optimizer with weight decay</a> along with a linear learning rate scheduler.</p>	
+	<p>We used the pretrained transformers models provided by <a target="_blank" href="https://huggingface.co/">Huggingface</a> in their <a target="_blank" href="https://huggingface.co/transformers/">transformers library</a>.</p>
+	<p style="padding-bottom: 0px;">The pretrained models we used include:</p>
+	<ul>
+	  <li><code>albert-base-v1</code></li>
+	  <li><code>albert-base-v2</code></li>
+	  <li><code>bert-base-cased</code></li>
+	  <li><code>bert-base-multilingual-cased</code></li>
+	  <li><code>bert-base-multilingual-uncased</code></li>
+	  <li><code>bert-base-uncased</code></li>
+	  <li><code>distilbert-base-cased-distilled-squad</code></li>
+	  <li><code>distilbert-base-multilingual-cased</code></li>
+	  <li><code>distilbert-base-uncased</code></li>
+	  <li><code>distilbert-base-uncased-distilled-squad</code></li>
+	  <li><code>distilroberta-base</code></li>
+	  <li><code>roberta-base</code></li>
+	  <li><code>xlm-mlm-en-2048</code></li>
+	  <li><code>xlm-roberta-base</code></li>
+	  <li><code>xlnet-base-cased</code></li>
+	</ul>
+	<p>We used grid search for hyperparameter tuning. Given that we used pretrained models, the only hyperparameters we searched over were batch size, max sequence length, gradient clipping threshold, number of training epochs, and initial learning rate.</p>
       </div>
     </section>
     <section id="experiment-results">
       <div class="horizontal-padding vertical-padding">
 	<h3>Experiment Results</h3>
-	<p>Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy.</p>
+	<p>Here are the best results we have found. Hover over the bars for model details.</p>
 	<div id="best-results"></div>
-	<p>Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy.</p>
+	<p>The best performing architecture was <code>albert-base-v2</code> with a testing accuracy of 83.6%.</p>
+	<p>NB: For the larger models, e.g. XLNet or XLM, we were not able to perform as many trials of hyperparameter settings given that they take up so much space. This makes our search incomplete. However, given the initial results we found as shown above, it's not clear that we would've gotten significantly better results with more trials of hyperparameter search.</p>
+	<p>Below are our results grouped by model.</p>
 	<div id="all-results-accordion"></div>
+	<p>All of our best results had testing accuracies of about 80% plus or minus 3%.</p>
+	<p>Given that all of the pretrained models performed similarly, it seems that for this task that the choice of which pretrained model to use doesn't make much difference.</p>
       </div>
     </section>
     <section id="conclusion" class="stone-background">
       <div class="horizontal-padding vertical-padding">
-	<h3>Concluding Remarks</h3>
-	<p>Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy.</p>
+	<h3>Conclusion</h3>
+	<p>Given that all of these models performed very similarly while drastically varying in model size, it seems that bigger is not always better or that even a fancier architecture is not always better.</p>
+	<p>Perhaps the reason why <a target="_blank" href="https://arxiv.org/abs/1810.04805">BERT</a> was chosen without much explanation w.r.t why in the <a target="_blank" href="https://www.curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/">original tutorial</a> was simply because it stemmed from the most popular NLP paper at the time.</p>
+	<p>Seeing that <code>albert-base-v2</code> was the best model, perhaps the takeaway message is that jumping straight into using bigger models while expecting better performance is not advisable. Another takeaway might be that using a smaller pretrained model is highlly valuable as well since hyperparameter tuning is significantly faster. </p>
+	<p>An interesting piece of future work would be to train a simpler NLP model, e.g. an <a target="_blank" href="https://explosion.ai/blog/deep-learning-formula-nlp">EEAP model</a>, to see if using a pretrained transformers model is even worth it since the pretrained trainsformers models are so large. If you're interested in seeing how that experiment would play out, <a target="_blank" href="https://paul-tqh-nguyen.github.io/about/#contact">let me know</a>.</p>
       </div>
       <table style="table-layout: fixed; width: 100%; padding-top: 40px; padding-bottom: 40px;">
 	<tr>
