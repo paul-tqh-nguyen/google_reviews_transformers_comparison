@@ -4,7 +4,6 @@ dependencies:
   - pytorch==1.4.0
   - pandas
   - scikit-learn
-  - conda-forge::mypy
   - pip
   - pip:
     - transformers
