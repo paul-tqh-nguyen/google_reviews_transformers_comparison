@@ -1,8 +1,23 @@
-'#!/usr/bin/python3 -OO' # @todo make this the default
+#!/usr/bin/python3 -OO
 
 '''
+
+This is the main driver for running several pretrained transformers models on the task of sentiment analysis for Google Play app reviews. 
+
+Sections:
+* Imports
+* Globals
+* Sanity Checking Utilities
+* Application-Specific Utilities
+* Data Preprocessing Utilities
+* Transformer Metaclass Utilities
+* Transformer Module Metaclasses
+* Transformer Classifier Metaclasses
+* Transformer Classifiers
+* Aggregate Hyperparameter Search Results
+* Driver
+
 '''
-# @todo update doc string
 
 ###########
 # Imports #
@@ -14,12 +29,13 @@ import argparse
 import operator
 import itertools
 import random
+import logging
 import multiprocessing as mp
 import pandas as pd
-from abc import ABC, abstractmethod
+from abc import ABC
 from functools import lru_cache
 from pandarallel import pandarallel
-from collections import OrderedDict
+from contextlib import contextmanager
 from typing import Tuple, Callable, Iterable, Generator
 from typing_extensions import Literal
 
@@ -32,8 +48,6 @@ from torch.utils import data
 
 import transformers 
 from transformers import AdamW, get_linear_schedule_with_warmup
-
-# @todo make sure all of the imports are used
 
 ###########
 # Globals #
@@ -60,11 +74,9 @@ NUMBER_OF_SENTIMENTS = len(SENTIMENT_ID_TO_SENTIMENT)
 # Sanity Checking Utilities #
 #############################
 
-from typing import Generator
-from contextlib import contextmanager
+
 @contextmanager
 def _transformers_logging_suppressed() -> Generator:
-    import logging
     logger_to_original_level = {}
     for name, logger in logging.root.manager.loggerDict.items():
         if isinstance(logger, logging.Logger) and name.startswith('transformers.'):
