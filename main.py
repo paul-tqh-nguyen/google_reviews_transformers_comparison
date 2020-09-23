@@ -281,7 +281,6 @@ class Classifier(ABC):
     def hyperparameter_search(cls,
                               model_name_choices: Iterable[str],
                               number_of_epochs_choices: Iterable[int] = [15, 30],
-                              batch_size_choices: Iterable[int] = [1],
                               batch_size_choices: Iterable[int] = [1, 32, 64],
                               learning_rate_choices: Iterable[float] = [
                                   4e-6, 4e-5,
